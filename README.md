@@ -1,7 +1,7 @@
 //// Trabalho realizado para materia de Banco de Dados da Fatec. O projeto consiste em criar um banco para uma biblioteca, inserir dados e criar consultas. 
 
 INSERT INTO `ALUNOS` (`NOME`)
-VALUES (‘Nicole Bla Bla Bla Carolina Amorim de Andrade’),
+VALUES (‘Nicole Bla Bla Bla de Andrade’),
 (‘Guilherme Bla Bla Bla Oliveira’);
 
 

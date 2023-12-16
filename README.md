@@ -1,18 +1,18 @@
 //// Trabalho realizado para materia de Banco de Dados da Fatec. O projeto consiste em criar um banco para uma biblioteca, inserir dados e criar consultas. 
 
 INSERT INTO `ALUNOS` (`NOME`)
-VALUES (‘Nicole Carolina Amorim de Andrade’),
-(‘Guilherme de Oliveira’);
+VALUES (‘Nicole Bla Bla Bla Carolina Amorim de Andrade’),
+(‘Guilherme Bla Bla Bla Oliveira’);
 
-
-CONTINUIDADE NO TRABALHO, TEMA ESCOLHIDO: BIBLIOTECA.
 
 
 
 DROP DATABASE IF EXISTS `biblioteca`;
 CREATE DATABASE `biblioteca`;
 USE `biblioteca`;
- 
+
+
+
 CREATE TABLE `biblioteca`.`aluguel` (
 id INT NOT NULL AUTO_INCREMENT,
 data_inicio DATE NOT NULL,
@@ -22,6 +22,8 @@ pago_sim_nao INT NOT NULL,
 PRIMARY KEY (`id`)
 );
 
+
+
 CREATE TABLE `biblioteca`.`cliente` (
 id INT NOT NULL AUTO_INCREMENT,
 nome_cliente VARCHAR(100) NOT NULL,
@@ -29,6 +31,8 @@ cpf VARCHAR(11) UNIQUE NOT NULL,
 endereco VARCHAR(100) NOT NULL,
  PRIMARY KEY (`id`)
 );
+
+
 
 CREATE TABLE `biblioteca`.`formas_de_pagamento` (
 id INT NOT NULL AUTO_INCREMENT,
@@ -39,19 +43,22 @@ cartao_credito INT NOT NULL,
 PRIMARY KEY (`id`)
 );
 
+
+
 CREATE TABLE `biblioteca`.`genero` (
 id INT NOT NULL AUTO_INCREMENT,
 titulo_genero VARCHAR(40) NOT NULL,
 PRIMARY KEY (`id`)
 );
 
+
+
 CREATE TABLE `biblioteca`.`autor` (
 id INT NOT NULL AUTO_INCREMENT,
 nome_autor VARCHAR(100) NOT NULL,
-    data_nascimento DATE NOT NULL,
-    nacionalidade VARCHAR(50) NOT NULL,
-
-    PRIMARY KEY (`id`)
+data_nascimento DATE NOT NULL,
+nacionalidade VARCHAR(50) NOT NULL,
+PRIMARY KEY (`id`)
 );
  
  
@@ -67,6 +74,8 @@ FOREIGN KEY (`genero_id`) REFERENCES `genero` (`id`),
 FOREIGN KEY (`autor_id`) REFERENCES `autor` (`id`)
 );
 
+
+
 CREATE TABLE `biblioteca`.`livro_aluguel` (
 id INT NOT NULL AUTO_INCREMENT,
 aluguel_id INT NOT NULL,
@@ -75,6 +84,8 @@ PRIMARY KEY (`id`),
 FOREIGN KEY (`aluguel_id`) REFERENCES `aluguel` (`id`),
 FOREIGN KEY (`livro_id`) REFERENCES `livro` (`id`)
 );
+
+
 
 CREATE TABLE `biblioteca`.`cliente_aluguel` (
 id INT NOT NULL AUTO_INCREMENT,
@@ -85,6 +96,8 @@ FOREIGN KEY (`aluguel_id`) REFERENCES `aluguel` (`id`),
 FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`)
 );
 
+
+
 CREATE TABLE `biblioteca`.`formasdepagamento_aluguel` (
 id INT NOT NULL AUTO_INCREMENT,
 formas_de_pagamento_id INT NOT NULL,
@@ -94,6 +107,8 @@ FOREIGN KEY (`aluguel_id`) REFERENCES `aluguel` (`id`),
 FOREIGN KEY (`formas_de_pagamento_id`) REFERENCES `formas_de_pagamento` (`id`)
 );
 
+
+\\ Inserindo os dados.
 
 INSERT INTO `cliente` (`nome_cliente`, `cpf`, `endereco`)
 VALUES ('John Andrew Winchester', '78945612321', 'Rua dos Pactos com olhos amarelos, 50'),
@@ -109,6 +124,7 @@ VALUES ('John Andrew Winchester', '78945612321', 'Rua dos Pactos com olhos amare
 ('Bella Talbot', '235897469', 'Rua das ladras, 171');
 
 
+
 INSERT INTO `livro` (`titulo_livro`, `data_publicacao`, `valor_livro`, `genero_id`, `autor_id`)
 VALUES
 ('A mulher de branco', '2000-05-10', '50.90', '5', '1'),
@@ -122,6 +138,8 @@ VALUES
 ('Carry On', '2020-12-11', '100.00', '1', '2'),
 ('Dom casmurro', '1899-10-10', '55.90', '4', '5');
 
+
+
 INSERT INTO `genero` (`titulo_genero`)
 VALUES
 ('Romance'),
@@ -129,6 +147,8 @@ VALUES
 ('Poesia'),
 ('Literatura'),
 ('Terror');
+
+
 
 INSERT INTO `autor` (`nome_autor`, `data_nascimento`, `nacionalidade`)
 VALUES
@@ -138,6 +158,8 @@ VALUES
 ('Clair Novak', '1975-11-04', 'Canadense'),
 ('Castiel Angelos', '1974-10-06', 'Mexicano'),
 ('Machado de Assis', '1899-01-12', 'Brasileiro');
+
+
 
 INSERT INTO `aluguel` (`data_inicio`, `data_devolucao`, `valor_total`, `pago_sim_nao`)
 VALUES 
@@ -152,8 +174,11 @@ VALUES
 ('2023-11-04', '2023-12-04', '13.90', 0),
 ('2023-11-15', '2023-12-05', '5.90', 1);
 
+
 INSERT INTO `formas_de_pagamento`(`pix`, `dinheiro`, `cartao_debito`, `cartao_credito`)
 VALUES ('1', '2', '3', '4');
+
+
 
 INSERT INTO `livro_aluguel` (`aluguel_id`, `livro_id`)
 VALUES 
@@ -177,6 +202,8 @@ VALUES
 ('1', '5'),
 ('4', '6'),
 ('2', '7'),
+
+
 INSERT INTO `cliente_aluguel` (`aluguel_id`, `cliente_id`)
 VALUES
 ('1', '1'),
@@ -235,7 +262,6 @@ FROM genero
 JOIN livro ON genero.id = livro.genero_id
 GROUP BY genero.titulo_genero;
 
-
 09 Lista de livros por gênero:
 SELECT livro.titulo_livro, genero.titulo_genero
 FROM livro
@@ -252,10 +278,6 @@ WHERE cliente_aluguel.id IS NULL;
 SELECT *
 FROM livro
 WHERE data_publicacao > '2010-01-01';
-
-
-
-
 
 12 Mostrar todos os clientes que pagaram em dinheiro:
 SELECT aluguel.data_inicio, aluguel.valor_total
